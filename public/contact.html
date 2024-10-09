@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eyebrow Empire | Contact</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <section class="text-gray-600 body-font relative">
+    <div class="container px-5 py-24 mx-auto">
+      <div class="flex flex-col text-center w-full mb-12">
+        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Feedback Form</h1>
+        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">We would love to hear your feedback. Please fill in the details below.</p>
+      </div>
+      <div class="lg:w-1/2 md:w-2/3 mx-auto">
+        <div class="flex flex-wrap -m-2">
+          <div class="p-2 w-1/2">
+            <input class="w-full bg-gray-100 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" placeholder="Name" id="name" type="text">
+          </div>
+          <div class="p-2 w-1/2">
+            <input class="w-full bg-gray-100 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" placeholder="Email" id="email" type="email">
+          </div>
+          <div class="p-2 w-full">
+            <input class="w-full bg-gray-100 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" placeholder="Phone" id="phone" type="text">
+          </div>
+          <div class="p-2 w-full">
+            <textarea class="w-full bg-gray-100 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out" placeholder="Message" id="message"></textarea>
+          </div>
+          <div class="p-2 w-full">
+            <button onclick="submitFeedback()" class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<script>
+    async function submitFeedback() {
+      try {
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+        const message = document.getElementById('message').value;
+
+        const response = await fetch('/submit-feedback', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ name, email, phone, message }),
+        });
+
+        if (response.ok) {
+          alert('Feedback submitted successfully!');
+        } else {
+          alert('Failed to submit feedback.');
+        }
+      } catch (err) {
+        alert("An error occurred while submitting feedback.");
+        alert(err);
+      }
+    }
+  </script>
+</body>
+</html>
